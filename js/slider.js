@@ -15,6 +15,14 @@ slider.prototype.initiate = function(){
     d3.select(this.div).html("");
     this.easel = d3.select(this.div).append("div")
 	.style("height","100%");
+
+    this.top_bar_div = this.easel.append("div")
+	.classed("top_bar", true)
+    this.top_bar_div.append("div")
+    	.classed("logo", true)
+    	.append("img")
+    	.attr("src","img/TREND_LOGO.png")
+    
     this.slide_div = this.easel.append("div")
 	.classed("slide", true);
     this.graphic_div = this.slide_div.append("div")
@@ -122,22 +130,36 @@ slider.prototype.add_bar = function(){
 slider.prototype.add_controls = function(){
     var that = this;
     this.control_area.html("");
-    if (this.current_slide < this.slides.length - 1){
-	var next_button = this.control_area.append("div")
-	    .classed("nav_button", true)
-	    .text("next")
-	    .on("click", function(){
-		that.next.call(that);
-	    });
-    }
+    var next_button = this.control_area.append("div")
+    // .classed("nav_button_wrapper", true)
+    // .append("div")
+	.classed("nav_button", true)
+	.classed("disabled", true)
+	.text("Next")
 
-    if (this.current_slide > 0) {
+    if (this.current_slide < this.slides.length - 1){
+	next_button.classed("disabled", false)
+	    .on("click", function(){
+	    that.next.call(that);
+	});
+
+    }
 	var prev_button = this.control_area.append("div")
 	    .classed("nav_button", true)
+	    .classed("disabled", true)
 	    .text("Previous")
 	    .on("click", function(){
 		that.prev.call(that);
 	    });
+
+    
+    if (this.current_slide > 0) {
+	prev_button.classed("disabled", true)
+	    .classed("disabled", false)
+	    .on("click", function(){
+		that.prev.call(that);
+	    });
+
     }
 
     this.control_area.append("div").classed("clear_both", true);
@@ -150,8 +172,9 @@ slider.prototype.percent = function(offset){
 }
 
 slider.prototype.render = function(updown){
+
     var slide = this.slides[this.current_slide];
-    this.copy_div.text(slide.copy);
+    this.copy_div.html(slide.copy);
     this.easel.style("background-color", slide.background_color);
     slide.graphic(this.graphic_div);
     // this.slides[this.current_slide].render().attach(this.easel.node());
@@ -165,8 +188,6 @@ slider.prototype.render = function(updown){
     }
     
     $(".copy").animate({"margin-top":"0px"}, 300,"easeInExpo");
-
-
     
     // var that = this;
 
@@ -179,9 +200,12 @@ slider.prototype.render = function(updown){
     // 		return that.percent(1) + "%";
     // 	    }
     // 	})
+
+    var bgcolor=this.slides[this.current_slide].background_color;
+    console.log(bgcolor);
     
     $(".progress_bar").animate({
-	"width":this.percent() + "%"
+	"width":this.percent() + "%",
     },250,"easeOutSine");
     
     this.add_controls();
