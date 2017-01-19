@@ -71,6 +71,8 @@ img {
     margin-bottom: 4px;
     padding-right: 4px;
     padding-left: 4px;
+    padding-top: 20px;
+    padding-bottom:20px;
     cursor: pointer;
 
     box-shadow: 10px 10px 0px black;
