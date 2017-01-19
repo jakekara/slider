@@ -144,13 +144,15 @@ slider.prototype.add_controls = function(){
 	});
 
     }
-	var prev_button = this.control_area.append("div")
-	    .classed("nav_button", true)
-	    .classed("disabled", true)
-	    .text("Previous")
-	    .on("click", function(){
-		that.prev.call(that);
-	    });
+
+    that = this;
+    var prev_button = this.control_area.append("div")
+	.classed("nav_button", true)
+	.classed("disabled", true)
+	.text("Previous")
+	.on("click", function(){
+	    that.prev.call(that);
+	});
 
     
     if (this.current_slide > 0) {
