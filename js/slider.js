@@ -181,15 +181,13 @@ slider.prototype.render = function(updown){
     slide.graphic(this.graphic_div);
     // this.slides[this.current_slide].render().attach(this.easel.node());
     
-    // $(this.div).show();
-
     if (updown == "up"){
-	$(".copy").css("margin-top","200px");
+	d3.selectAll(".copy").style("margin-top","200px");
     } else {
-	$(".copy").css("margin-top","-200px");
+	d3.selectAll(".copy").style("margin-top","-200px");
     }
     
-    $(".copy").animate({"margin-top":"0px"}, 300,"easeInExpo");
+    d3.selectAll(".copy").transition().style("margin-top","0px").duration(300);
     
     // var that = this;
 
@@ -204,11 +202,10 @@ slider.prototype.render = function(updown){
     // 	})
 
     var bgcolor=this.slides[this.current_slide].background_color;
-    console.log(bgcolor);
     
-    $(".progress_bar").animate({
-	"width":this.percent() + "%",
-    },250,"easeOutSine");
+    d3.selectAll(".progress_bar").transition()
+	.style("width",this.percent() + "%")
+	.duration(250);
     
     this.add_controls();
     this.set_up_touch();
