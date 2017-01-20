@@ -98,9 +98,9 @@ slider.prototype.set_up_touch = function(){
 	that.startY = null;
     };
     
-    d3.select(window).node().addEventListener("touchstart", handleStart);
-    d3.select(window).node().addEventListener("touchmove", handleMove);
-    d3.select(window).node().addEventListener("touchend", handleEnd);
+    // d3.select(window).node().addEventListener("touchstart", handleStart);
+    // d3.select(window).node().addEventListener("touchmove", handleMove);
+    // d3.select(window).node().addEventListener("touchend", handleEnd);
 
     that.lock = false;
 
