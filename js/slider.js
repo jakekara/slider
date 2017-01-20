@@ -120,7 +120,7 @@ slider.prototype.set_up_touch = function(){
 	}, 50);
     }
     
-    d3.select(window).node().addEventListener("mousewheel", handleScroll);
+    // d3.select(window).node().addEventListener("mousewheel", handleScroll);
 }
 
 slider.prototype.add_bar = function(){
