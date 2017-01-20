@@ -238,7 +238,7 @@ slider.prototype.next = function(){
     this.next_throttle = setTimeout(function(){
 	that.current_slide ++;
 	that.render("down");
-    }, 500);
+    }, 200);
 }
 
 slider.prototype.prev = function(){
@@ -249,5 +249,5 @@ slider.prototype.prev = function(){
     this.prev_throttle = setTimeout(function(){
 	that.current_slide --;
 	that.render("up");
-    }, 500);
+    }, 200);
 }
