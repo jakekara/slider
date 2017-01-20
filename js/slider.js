@@ -203,9 +203,9 @@ slider.prototype.render = function(updown){
 
     var bgcolor=this.slides[this.current_slide].background_color;
     
-    d3.selectAll(".progress_bar").transition()
+    d3.selectAll(".progress_bar")
+	.transition()
 	.style("width",this.percent() + "%")
-	.duration(250);
     
     this.add_controls();
     this.set_up_touch();
@@ -233,12 +233,21 @@ slider.prototype.has_prev = function(){
 slider.prototype.next = function(){
     if (!this.has_next()) return;
 
-    this.current_slide ++;
-    this.render("down");
+    var that = this;
+    clearTimeout(this.next_throttle);
+    this.next_throttle = setTimeout(function(){
+	that.current_slide ++;
+	that.render("down");
+    }, 500);
 }
 
 slider.prototype.prev = function(){
     if(!this.has_prev()) return;
-    this.current_slide --;
-    this.render("up");
+
+    var that = this;
+    clearTimeout(this.prev_throttle);
+    this.prev_throttle = setTimeout(function(){
+	that.current_slide --;
+	that.render("up");
+    }, 500);
 }
